@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ForNow</string>
+    <string name="for_now">To-Do</string>
+    <string name="done">Done</string>
+    <string name="settings">Settings</string>
+    <string-array name="emotion_array">
+        <item>Very Important</item>
+        <item>Fairly Important</item>
+        <item>Important</item>
+        <item>Slightly Important</item>
+        <item>Not Important</item>
+    </string-array>
+    <string name="quote">Nobody Is Too Busy. It\'s just a matter of priority.</string>
+</resources>
