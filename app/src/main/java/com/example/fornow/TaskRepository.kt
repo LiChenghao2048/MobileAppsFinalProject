@@ -13,17 +13,19 @@ class TaskRepository (private val taskDAO: TaskDAO) {
 
     suspend fun delete(id: Int) {taskDAO.delete(id)}
 
-    suspend fun updateTaskInfo(name: String, description: String, deadline: Date, timeNeeded: Int, importance: String, id: Int) {
+    suspend fun updateTaskInfo(name: String, description: String, deadline: Long, timeNeeded: Int, importance: Int, id: Int) {
         taskDAO.updateTaskInfo(name, description, deadline, timeNeeded, importance, id)
     }
 
-    suspend fun updateTaskStatus(status: Int, id: Int) {
-        taskDAO.updateTaskStatus(status, id)
+    suspend fun updateTaskStatus(done: Boolean, id: Int) {
+        taskDAO.updateTaskStatus(done, id)
     }
 
     suspend fun updatePriority(priority: Int, id: Int) {
         taskDAO.updatePriority(priority, id)
     }
 
-    fun getTask(id: Int) : Flow<Task> {return taskDAO.getTask(id)}
+    suspend fun getTask(id: Int) : Task{
+        return taskDAO.getTask(id)
+    }
 }

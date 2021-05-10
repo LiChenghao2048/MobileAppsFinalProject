@@ -16,14 +16,19 @@ class TaskViewModel (private val repository: TaskRepository) : ViewModel(){
 
     fun delete(id: Int) = viewModelScope.launch { repository.delete(id) }
 
-    fun updateTaskInfo(name: String, description: String, deadline: Date, timeNeeded: Int, importance: String, id: Int)
+    fun updateTaskInfo(name: String, description: String, deadline: Long, timeNeeded: Int, importance: Int, id: Int)
         = viewModelScope.launch { repository.updateTaskInfo(name, description, deadline, timeNeeded, importance, id) }
 
-    fun updateTaskStatus(status: Int, id: Int) = viewModelScope.launch { repository.updateTaskStatus(status, id) }
+    fun updateTaskStatus(done: Boolean, id: Int) = viewModelScope.launch { repository.updateTaskStatus(done, id) }
 
     fun updatePriority(priority: Int, id: Int) = viewModelScope.launch { repository.updatePriority(priority, id) }
 
-    fun getTask(id: Int):LiveData<Task> = repository.getTask(id).asLiveData()
+    val returnedTask = MutableLiveData<Task>()
+    fun getTask(id: Int) {
+        viewModelScope.launch {
+            returnedTask.value = repository.getTask(id)
+        }
+    }
 }
 
 class TaskViewModelFactory(private val repository: TaskRepository) : ViewModelProvider.Factory{
